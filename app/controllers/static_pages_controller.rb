@@ -3,16 +3,23 @@ class StaticPagesController < ApplicationController
 
   # GET /static_pages or /static_pages.json
   def index
-    @static_pages = StaticPage.all
+    # @static_pages = StaticPage.all
   end
-
+  
   # GET /static_pages/1 or /static_pages/1.json
   def show
   end
 
   # GET /static_pages/new
   def new
-    @static_page = StaticPage.new
+    # binding.pry
+    return unless params[:user_id]
+
+    api_key = ENV['FLICKR_API_KEY']
+    flickr = Flickr.new api_key, ENV['FLICKR_API_SECRET']
+    list = flickr.people.getPublicPhotos api_key: api_key, user_id: params[:user_id]
+    binding.pry
+    # @static_page = StaticPage.new
   end
 
   # GET /static_pages/1/edit
@@ -21,17 +28,18 @@ class StaticPagesController < ApplicationController
 
   # POST /static_pages or /static_pages.json
   def create
-    @static_page = StaticPage.new(static_page_params)
+    puts 'CREATE'
+    # @static_page = StaticPage.new(static_page_params)
 
-    respond_to do |format|
-      if @static_page.save
-        format.html { redirect_to static_page_url(@static_page), notice: "Static page was successfully created." }
-        format.json { render :show, status: :created, location: @static_page }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @static_page.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @static_page.save
+    #     format.html { redirect_to static_page_url(@static_page), notice: "Static page was successfully created." }
+    #     format.json { render :show, status: :created, location: @static_page }
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @static_page.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /static_pages/1 or /static_pages/1.json

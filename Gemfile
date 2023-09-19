@@ -72,3 +72,4 @@ group :test do
 end
 
 gem 'flickr', '~> 2.1'
+gem 'pry-byebug'
