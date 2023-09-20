@@ -8,3 +8,11 @@
     <%= form.submit 'Get photos for user id' %>
   </div>
 <% end %>
+
+<hr>
+
+<% if @list && @list.length.positive? %>
+  <% @list.each do |photo| %>
+    <div><%= photo.id %><div>
+  <% end %>
+<% end %>

@@ -17,8 +17,8 @@ class StaticPagesController < ApplicationController
 
     api_key = ENV['FLICKR_API_KEY']
     flickr = Flickr.new api_key, ENV['FLICKR_API_SECRET']
-    list = flickr.people.getPublicPhotos api_key: api_key, user_id: params[:user_id]
-    binding.pry
+    @list = flickr.people.getPublicPhotos user_id: params[:user_id]
+
     # @static_page = StaticPage.new
   end
 
