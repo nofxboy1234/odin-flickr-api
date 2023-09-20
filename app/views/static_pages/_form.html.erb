@@ -11,8 +11,8 @@
 
 <hr>
 
-<% if @list && @list.length.positive? %>
-  <% @list.each do |photo| %>
-    <div><%= photo.id %><div>
+<% if @photo_urls && @photo_urls.length.positive? %>
+  <% @photo_urls.each do |photo_url| %>
+    <div><%= image_tag photo_url %><div>
   <% end %>
 <% end %>
